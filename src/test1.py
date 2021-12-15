@@ -7,6 +7,8 @@
 import re
 import requests
 import shutil
+from bs4 import BeautifulSoup
+
 
 HEADERS = {
 
@@ -22,6 +24,7 @@ if __name__ == '__main__':
 
 
     re = requests.session().post(url, headers = HEADERS)
+    re = requests.get()
 
     file = "get.txt"
 
