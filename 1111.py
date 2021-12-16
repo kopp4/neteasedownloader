@@ -5,6 +5,11 @@
 # @Software: PyCharm
 import requests
 
+"""
+TRASH, NOT RELEVANT TO THE PROJECT
+"""
+
+
 HEADERS = {
     'User-Agent': 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36'
 }

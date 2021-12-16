@@ -8,7 +8,11 @@ import src.ui
 import src.menu
 import src.store
 import src.onfetching
+import src.encode
 
 
 gui = src.ui.ui # todo might be wrong
-fetch = src.onfetching
+
+# fetch = src.onfetching.getNetease
+
+# encoding = src.encode.encode

@@ -17,6 +17,10 @@ if __name__ == '__main__':
     show = s.gui()
 
 
+    # fetch = s.onfetching.getNetease()
+
+    # fetch.fetch_playlists()
+
 '''
 https://music.163.com/#/user/home?id=350278537
 '''
