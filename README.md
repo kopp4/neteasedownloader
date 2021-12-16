@@ -1,6 +1,6 @@
 # neteasedownloader
 
-> This project download 10 non-premium songs in the playlists of your entered profile url recursively
+> This project download 10 non-premium songs in every playlist of your entered profile url recursively
 > into local database (mysql) -- bc just 4 fun
 
 prerequisite:
