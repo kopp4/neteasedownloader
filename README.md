@@ -1,13 +1,10 @@
-# fakeneteasejust4fun
+# neteasedownloader
 
-> This project crawing every song in every playlist from the url the user input, store the data 
+> This project download 10 non-premium songs in every playlist of your entered profile url recursively
 > into local database (mysql) -- bc just 4 fun
 
 prerequisite:
-* python dev
-  * requests
-  * tkinter
-  * re
+* python IDE
 * mysql
 
 
