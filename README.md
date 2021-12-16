@@ -9,3 +9,8 @@ prerequisite:
   * tkinter
   * re
 * mysql
+
+
+---
+* HOW DID WE GET HERE
+[![HOW DID WE GET HERE](https://s4.ax1x.com/2021/12/16/T9PRu6.png)](https://imgtu.com/i/T9PRu6)
