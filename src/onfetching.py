@@ -74,7 +74,7 @@ class getNetease:
         else:
             return user_name
 
-    def fetch_playlists(self, uid):  # todo URL
+    def fetch_playlists(self, uid):
         print("Fetching playlists : " + "")
 
         formdata = {
@@ -173,7 +173,7 @@ class getNetease:
             song_name = song['name'][0]
 
 
-            formdata = {'params': self.get_params_song(song_id),
+            formdata = {'params': self.get_params_song(song_id),        # todo add another parameter to get_params function e.g. get_params(song_id, s)||get_params(playlist_id, p) => get_params(id, key): if key else
                         'encSecKey': self.get_encSecKey()}
 
 
@@ -199,7 +199,15 @@ class getNetease:
                     print(e)
 
 
-    def get_params_profile(self, UID):  # todo this is function d(d, e, f, g) UID
+    def get_rank_profile(self, UID):
+
+        formdata = {
+            "params" : self.
+            "encSecKey" : self.get_encSecKey()
+        }
+
+
+    def get_params_profile(self, UID):  # this is function d(d, e, f, g)
 
         encode = s.encode.encode()
 
@@ -214,11 +222,8 @@ class getNetease:
 
         b = "0CoJUm6Qyw8W8jud"
 
-        # todo modify uid here
         # Quotation mark sucks, so I'll just use str()
         # Edit : str() sucks
-
-        # todo param2 I suppose
 
         self.i = encode.i
         # return self.encode.func_b(self.encode.func_b(a, b), self.i)       # Call encoding method in encode.py
@@ -233,11 +238,11 @@ class getNetease:
 
         b = "0CoJUm6Qyw8W8jud"
 
-        # todo modify uid here
+
         # Quotation mark sucks, so I'll just use str()
         # Edit : str() sucks
 
-        # todo param2 I suppose
+
 
         self.i = encode.i
         # return self.encode.func_b(self.encode.func_b(a, b), self.i)       # Call encoding method in encode.py
