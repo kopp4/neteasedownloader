@@ -28,7 +28,7 @@ class encode:
 # Fortunately user id appear at last   <3<3<3
 
     def __init__(self):
-        self.i = self.func_a("16")
+        self.i = self.func_a("16")                                                          # i is supposed to be unified
 
 
     def func_a(self, a):
@@ -71,12 +71,5 @@ class encode:
 
     # UID : User ID
 
-
-
-
-
-if __name__ == '__main__':
-    encode = encode()
-    encode.on_fetching()
 
 

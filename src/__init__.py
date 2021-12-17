@@ -11,7 +11,7 @@ import src.onfetching
 import src.encode
 
 
-gui = src.ui.ui # todo might be wrong
+gui = src.ui.Ui # todo might be wrong
 
 # fetch = src.onfetching.getNetease
 
