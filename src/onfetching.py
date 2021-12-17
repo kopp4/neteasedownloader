@@ -12,6 +12,8 @@ import json
 from requests_html import HTMLSession
 from lxml import etree
 
+from enum import Enum
+
 import base64, codecs
 from Crypto.Cipher import AES
 
@@ -19,18 +21,16 @@ import src as s
 
 # import src.encode     encode = src.encode.encode()
 """
-functions related to requests
+functions related to post
 """
 
 HEADERS = {
     'User-Agent': 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36'
 }
 
-regex1 = r'''\"title\"\s?:\s?\"(.+)\"'''  # for getting username in user profile
-
-# regex1 = r'<li><a href="/song\?id=\d+">(.+?)</a></li>'
-
 regex = r"\"name\"\s?:\s?\"(.+?)\""  # Regex for filtering the playlists name in the profile
+
+regex1 = r'''\"title\"\s?:\s?\"(.+)\"'''  # for getting username in user profile
 
 regex2 =  r"\"id\"\s?\s?\:(\d+)"  # Regex for obtain all the playlists id
 
@@ -78,7 +78,7 @@ class getNetease:
         print("Fetching playlists : " + "")
 
         formdata = {
-            "params": self.get_params_profile(uid),
+            "params": self.get_params(uid, "profile"),
             "encSecKey": self.get_encSecKey()
         }
 
@@ -173,7 +173,7 @@ class getNetease:
             song_name = song['name'][0]
 
 
-            formdata = {'params': self.get_params_song(song_id),        # todo add another parameter to get_params function e.g. get_params(song_id, s)||get_params(playlist_id, p) => get_params(id, key): if key else
+            formdata = {'params': self.get_params(song_id, "song"),        # todo add another parameter to get_params function e.g. get_params(song_id, s)||get_params(playlist_id, p) => get_params(id, key): if key else
                         'encSecKey': self.get_encSecKey()}
 
 
@@ -199,16 +199,26 @@ class getNetease:
                     print(e)
 
 
-    def get_rank_profile(self, UID):
+    # def get_rank_profile(self, UID):
+    #
+    #     formdata = {
+    #         "params" : self.
+    #         "encSecKey" : self.get_encSecKey()
+    #     }
+
+
+    def modify_formdata(self, ID, key):         # **ID** : song or profile id, **key** : key to judge the posting params
 
         formdata = {
-            "params" : self.
-            "encSecKey" : self.get_encSecKey()
+            "params": self.get_params(ID, key),
+            "encSecKey": self.get_encSecKey()
         }
+        return formdata
 
-
-    def get_params_profile(self, UID):  # this is function d(d, e, f, g)
-
+    def get_params(self, ID, key):                                                      # this is function d(d, e, f, g)
+        """
+        :key :  "profile", "song"
+        """
         encode = s.encode.encode()
 
         """
@@ -217,35 +227,19 @@ class getNetease:
         b = "0CoJUm6Qyw8W8jud"
         """
         # a : encoded params
-        # a = str({'ids': "[" + str(549321040) + "]", 'br': 128000, 'csrf_token': ""})
-        a = """{\"uid\":\"""" + UID + """\",\"type\":\"-1\",\"limit\":\"1000\",\"offset\":\"0\",\"total\":\"true\",\"csrf_token\":\"\"}"""
+        if key == "profile":
+            a = """{\"uid\":\"""" + ID + """\",\"type\":\"-1\",\"limit\":\"1000\",\"offset\":\"0\",\"total\":\"true\",\"csrf_token\":\"\"}"""   # str() is way better
+        elif key == "song":
+            a = str({'ids': "[" + str(ID) + "]", 'br': 128000, 'csrf_token': ""})                            # todo str() yes
+            # Quotation mark sucks, so I'll just use str()
+        else:
+            print("Error : Params are Wrong!!!")
 
         b = "0CoJUm6Qyw8W8jud"
 
-        # Quotation mark sucks, so I'll just use str()
-        # Edit : str() sucks
-
         self.i = encode.i
         # return self.encode.func_b(self.encode.func_b(a, b), self.i)       # Call encoding method in encode.py
-        return encode.func_b(encode.func_b(a, b), self.i)  # Call encoding method in encode.py
 
-    def get_params_song(self, SID):  # todo this is function d(d, e, f, g) SID
-        encode = s.encode.encode()
-
-
-        a = str({'ids': "[" + str(SID) + "]", 'br': 128000, 'csrf_token': ""})
-
-
-        b = "0CoJUm6Qyw8W8jud"
-
-
-        # Quotation mark sucks, so I'll just use str()
-        # Edit : str() sucks
-
-
-
-        self.i = encode.i
-        # return self.encode.func_b(self.encode.func_b(a, b), self.i)       # Call encoding method in encode.py
         return encode.func_b(encode.func_b(a, b), self.i)  # Call encoding method in encode.py
 
 
