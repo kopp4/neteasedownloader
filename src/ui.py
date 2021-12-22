@@ -99,10 +99,10 @@ class Ui:
             # self.LABEL0 = tkinter.Label(self.window0, text = "Hello, ")
 
             BUTTON0 = tkinter.Button(self.window0, text = "To download all the songs", command = self.getsongs)
-            BUTTON0.pack()
+            BUTTON0.pack(side = "left")
 
             BUTTON1 = tkinter.Button(self.window0, text = "To show the rank graph", command = self.getrank)
-            BUTTON1.pack()
+            BUTTON1.pack(side = "left")
 
             self.window0.mainloop()
             """"""
@@ -125,9 +125,16 @@ class Ui:
 
     def getrank(self):
         """
-        Calling the get rank function from onfetching.py
+        Calling the get rank function from onfetching.py, also generate the corresponding graph
         """
         self.fetch.fetch_rank(self.uid)
+
+    def storeSongs(self):
+        """
+        Literally, storing the songs
+        """
+
+
 
     def test_myrank(self):
         print("ID : 350278537")

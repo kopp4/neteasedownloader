@@ -48,11 +48,11 @@ song_post_url = "https://music.163.com/weapi/song/enhance/player/url?csrf_token=
 
 rank_post_url = "https://music.163.com/weapi/v1/play/record?csrf_token="
 
-path = "e:/Music/"
+
+"""Path of the main folder"""
+path = os.getcwd() + "/"
 
 class getNetease:
-
-    """Path of the main folder"""
 
     def __init__(self, profile_url):
 
@@ -226,11 +226,12 @@ class getNetease:
         if music_list:
             self._download(music_list, playlist)
             return music_list       # GENIUS
-        # return
-
-        # print(html)
 
     def fetch_rank(self, uid):
+        """
+        Fetch the ranking data of the entered uid
+        Also generate the corresponding graph with matplotlib
+        """
 
         print("Fetching ranking of " + self.user_name + "'s")
 
@@ -252,6 +253,8 @@ class getNetease:
 
         plt.pie(slice, labels = slice_name)  # **labels** = slice_name
 
+        plt.savefig(self.user_name + ".png")
+
         plt.show()
 
 
@@ -264,18 +267,6 @@ class getNetease:
             "encSecKey": self._get_encSecKey()
         }
         return formdata
-
-
-
-
-    # def get_rank_profile(self, UID):
-    #
-    #     formdata = {
-    #         "params" : self.
-    #         "encSecKey" : self.get_encSecKey()
-    #     }
-
-
 
 
 
