@@ -57,7 +57,7 @@ class Ui:
         self.BUTTON0 = tkinter.Button(self.window0, text = "submit", command = self.functions, compound = "left")   # todo CRITICAL!!!
         # self.BUTTON0.place(x=100, y=100)
         # self.btnquit
-        BUTTONTEST = tkinter.Button(self.window0, text = "fetch demo rank", command = self.test, compound = "right")
+        BUTTONTEST = tkinter.Button(self.window0, text = "fetch demo rank", command = self.test_myrank, compound = "right")
         self.BUTTON0.pack(side = "left", expand = True)
         BUTTONTEST.pack(side = "left", expand = True)
 
@@ -72,21 +72,21 @@ class Ui:
         the next window, make the user to decide whether to go forward
         :return:
         """
-        try:
-            self.uid = re.search(regex, self.ENTRY0.get()).group(1)
-        except AttributeError as e:
+        while True:
+            try:
+                self.uid = re.search(regex, self.ENTRY0.get()).group(1)
+                if self.uid != None:
+                    break
+            except AttributeError as e:
 
-            print(e)
-            print("THE FORMAT !!!")
+                print(e)
+                print("THE FORMAT !!!")
+                      #fixme
+                self.uid = None
+                self.ENTRY0.destroy()
+                self.ENTRY0 = tkinter.Entry(self.window0, font = ("Arial", 20), textvariable = self.txt, bg = "#2b2b2b", fg = "#bbbbbb")
+                self.ENTRY0.pack(side = "right")  # FIXME BRO
 
-            self.__init__       #fixme
-
-
-            self.uid = None
-
-            # self.ENTRY0.destroy()
-            # self.ENTRY0 = tkinter.Entry(self.window0, font = ("Arial", 20), textvariable = self.txt, bg = "#2b2b2b", fg = "#bbbbbb")
-            # self.ENTRY0.pack(side = "right")                                                             # FIXME BRO
 
 
         if self.uid:  # Judging else print THE FORMAT!!
@@ -104,7 +104,7 @@ class Ui:
             self.BUTTON0 = tkinter.Button(self.window0, text = "To download all the songs", command = self.getsongs)  # Yes, I use them repeatedly
             self.BUTTON0.pack()
 
-            self.BUTTON1 = tkinter.Button(self.window0, text = "To show the rank graph", command = self.test())
+            self.BUTTON1 = tkinter.Button(self.window0, text = "To show the rank graph", command = self.test_myrank())
             self.BUTTON0.pack()
             """"""
 
@@ -133,9 +133,12 @@ class Ui:
 
         print("COMPLETE!!")
 
-    def test(self):
-        print("350278537")
+    def test_myrank(self):
+        print("ID : 350278537")
         fetch = src.onfetching.getNetease(url.format("350278537"))
-        print(fetch.fetch_rank("350278537"))
 
-    # def delete(self):
+        fetch.fetch_rank("350278537")
+
+
+    def delete(self):
+        pass

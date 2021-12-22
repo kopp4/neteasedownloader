@@ -34,7 +34,9 @@ regex1 = r'''\"title\"\s?:\s?\"(.+)\"'''                                        
 
 regex2 =  r"\"id\"\s?\s?\:(\d+)"                                                    # Regex for obtain all the playlists id
 
-regex3 = r"\"score\":(\d+?),\"song\":{\"name\":\"(.+?)\""       # Regex for obtain song score and song name in user's ranking
+regex3 = r"\"score\":(\d+?),\"song\":{\"name\":\"(.+?)\""       # Regex for obtaining song score in user's ranking
+
+# regex4 = r"\"song\":{\"name\":\"(.+?)\""       # Regex for obtaining song name in user's ranking
 
 playlists_post_url = "https://music.163.com/weapi/user/playlist?csrf_token="
 
@@ -164,7 +166,7 @@ class getNetease:
 
         playlists_name = re.findall(regex, content)
 
-        playlists_id = (re.findall(regex2, content))   # Obtain all playlists id in the profile
+        playlists_id = re.findall(regex2, content)   # Obtain all playlists id in the profile
 
         print(self.user_name)
 
@@ -232,7 +234,18 @@ class getNetease:
 
         content = response.text
 
-        return re.findall(regex3, content)
+        print(content)
+
+        score = re.findall(regex3, content)
+
+        # song = re.findall(regex4, content)
+
+        print(score)
+
+
+        return
+
+
 
     def get_modify_formdata(self, ID, key):         # **ID** : song or profile id, **key** : key to judge the posting params
 
