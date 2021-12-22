@@ -55,8 +55,7 @@ class Ui:
         # self.ENTRY0.place(x=80, y=50)
 
         self.BUTTON0 = tkinter.Button(self.window0, text = "submit", command = self.functions, compound = "left")   # todo CRITICAL!!!
-        # self.BUTTON0.place(x=100, y=100)
-        # self.btnquit
+
         BUTTONTEST = tkinter.Button(self.window0, text = "fetch demo rank", command = self.test_myrank, compound = "right")
         self.BUTTON0.pack(side = "left", expand = True)
         BUTTONTEST.pack(side = "left", expand = True)
@@ -72,20 +71,18 @@ class Ui:
         the next window, make the user to decide whether to go forward
         :return:
         """
-        while True:
-            try:
-                self.uid = re.search(regex, self.ENTRY0.get()).group(1)
-                if self.uid != None:
-                    break
-            except AttributeError as e:
+        try:
+            self.uid = re.search(regex, self.ENTRY0.get()).group(1)
+        except Exception as e:
 
-                print(e)
-                print("THE FORMAT !!!")
-                      #fixme
-                self.uid = None
-                self.ENTRY0.destroy()
-                self.ENTRY0 = tkinter.Entry(self.window0, font = ("Arial", 20), textvariable = self.txt, bg = "#2b2b2b", fg = "#bbbbbb")
-                self.ENTRY0.pack(side = "right")  # FIXME BRO
+            print(e)
+            print("THE FORMAT !!!")
+            self.window0.destroy()
+            self.__init__()
+            # self.uid = None
+            # self.ENTRY0.destroy()
+            # self.ENTRY0 = tkinter.Entry(self.window0, font = ("Arial", 20), textvariable = self.txt, bg = "#2b2b2b", fg = "#bbbbbb")
+            # self.ENTRY0.pack(side = "right")  # FIXME BRO
 
 
 
@@ -98,14 +95,16 @@ class Ui:
 
             """"""
             self.window0.destroy()  # from the original lib:'''Destroy this and all descendants widgets, end the application of this Tcl interpreter."'''
+            self.window0 = tkinter.Tk()
+            # self.LABEL0 = tkinter.Label(self.window0, text = "Hello, ")
 
-            self.LABEL0 = tkinter.Label(self.window0, text = "Hello, ")
+            BUTTON0 = tkinter.Button(self.window0, text = "To download all the songs", command = self.getsongs)
+            BUTTON0.pack()
 
-            self.BUTTON0 = tkinter.Button(self.window0, text = "To download all the songs", command = self.getsongs)  # Yes, I use them repeatedly
-            self.BUTTON0.pack()
+            BUTTON1 = tkinter.Button(self.window0, text = "To show the rank graph", command = self.getrank)
+            BUTTON1.pack()
 
-            self.BUTTON1 = tkinter.Button(self.window0, text = "To show the rank graph", command = self.test_myrank())
-            self.BUTTON0.pack()
+            self.window0.mainloop()
             """"""
 
 
@@ -121,6 +120,7 @@ class Ui:
         """
         self.fetch.fetch_playlists(self.uid)
 
+        # self.fetch.fetch_rank(self.uid)
 
 
     def getrank(self):
@@ -128,10 +128,6 @@ class Ui:
         Calling the get rank function from onfetching.py
         """
         self.fetch.fetch_rank(self.uid)
-
-    def notify(self):
-
-        print("COMPLETE!!")
 
     def test_myrank(self):
         print("ID : 350278537")

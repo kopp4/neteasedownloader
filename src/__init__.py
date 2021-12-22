@@ -5,7 +5,6 @@
 # @Software: PyCharm
 
 import src.ui
-import src.menu
 import src.store
 import src.onfetching
 import src.encode

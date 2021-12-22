@@ -11,6 +11,8 @@ import requests
 import json
 from requests_html import HTMLSession
 from lxml import etree
+from matplotlib import pyplot as plt
+
 
 from enum import Enum
 
@@ -34,9 +36,11 @@ regex1 = r'''\"title\"\s?:\s?\"(.+)\"'''                                        
 
 regex2 =  r"\"id\"\s?\s?\:(\d+)"                                                    # Regex for obtain all the playlists id
 
-regex3 = r"\"score\":(\d+?),\"song\":{\"name\":\"(.+?)\""       # Regex for obtaining song score in user's ranking
+regex3 = r"\"song\":{\"name\":\"(.+?)\""       # Regex for obtaining song score in user's ranking
 
-# regex4 = r"\"song\":{\"name\":\"(.+?)\""       # Regex for obtaining song name in user's ranking
+regex4 = r"{.+\"weekData"        # Regex for obtaining
+
+regex5 = r"\"score\":(\d+?),"           # Regex for obtaining song name
 
 playlists_post_url = "https://music.163.com/weapi/user/playlist?csrf_token="
 
@@ -234,16 +238,22 @@ class getNetease:
 
         content = response.text
 
-        print(content)
+        filtered_content = re.findall(regex4, content)   # Filter the weekdata part
 
-        score = re.findall(regex3, content)
+        # overall_data = re.findall(regex3, str(filtered_content))    # [('100', '小さな恋のうた'), ('65', 'Cold'), ('59', 'α'), ('57', 'γ'), ('52', 'カゲロウ'), ('47', 'δ'......
 
-        # song = re.findall(regex4, content)
+        slice_name = re.findall(regex3, str(filtered_content))
 
-        print(score)
+        slice = re.findall(regex5, str(filtered_content))
 
+        plt.rcParams['font.family'] = ['SimHei']
 
-        return
+        plt.title("ore")
+
+        plt.pie(slice, labels = slice_name)  # **labels** = slice_name
+
+        plt.show()
+
 
 
 
